@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="creditCard">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="lib/angular.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <style type="text/css">
+    .container-table {
+        display: table;
+        width: 50%;
+    }
+    
+    .vertical-center-row {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    </style>
+</head>
+
+<body>
+    <div ng-controller="MainCtrl" ng-form="cardValidation" ng-class="validity ? 'valid' : 'invalid'" class="container container-table ">
+        <div class=" row vertical-center-row">
+            <div>
+                <valid-card name="cardNo" ng-model="card.number"></valid-card>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input class="form-control" type="text" ng-change="cvvValidation(card)" name="securityCode" ng-model="card.cvv" placeholder="CCV" required   />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <select class="form-control" ng-model="card.month" name="month" data-card-expiration required>
+                        <option disabled selected value="">Month</option>
+                        <option ng-repeat="month in months" value="{{$index+1}}">{{month}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control" ng-model="card.year" name="year" required>
+                        <option disabled selected value="">Year</option>
+                        <option ng-repeat="year in years">{{year}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-md-4">
+                    <button class="btn btn-primary" ng-click="pay(card)">Pay</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
